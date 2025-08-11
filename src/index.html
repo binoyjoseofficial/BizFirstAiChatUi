@@ -8,6 +8,15 @@
 	</head>
 	<body>
         <div class="chat-ai"></div>
-        <script type="module" src="js/AiChatUI.js"></script>
+        <!-- Load scripts in dependency order -->
+        <script src="js/OptionsManager.js"></script>
+        <script src="js/ConversationManager.js"></script>
+        <script src="js/HtmlTemplates.js"></script>
+        <script src="js/MessageHandler.js"></script>
+        <script src="js/ApiService.js"></script>
+        <script src="js/UiRenderer.js"></script>
+        <script src="js/EventManager.js"></script>
+        <script src="js/HtmlQuery.js"></script>
+        <script src="js/AiChatUI.js"></script>
 	</body>
 </html>

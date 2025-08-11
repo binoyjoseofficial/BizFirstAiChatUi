@@ -1,4 +1,4 @@
-export class ConversationManager {
+class ConversationManager {
     constructor(optionsManager) {
         this.optionsManager = optionsManager;
         this.conversations = this.optionsManager.options.conversations || [];
@@ -6,15 +6,24 @@ export class ConversationManager {
     }
 
     getCurrentConversation() {
-        return this.conversations[this.selectedIndex];
+        if (this.selectedIndex >= 0 && this.selectedIndex < this.conversations.length) {
+            return this.conversations[this.selectedIndex];
+        }
+        return null;
     }
 
     addUserMessage(message) {
-        this.getCurrentConversation().messages.push({ role: 'user', content: message });
+        const conversation = this.getCurrentConversation();
+        if (conversation) {
+            conversation.messages.push({ role: 'user', content: message });
+        }
     }
 
     addAssistantMessage(message) {
-        this.getCurrentConversation().messages.push({ role: 'assistant', content: message });
+        const conversation = this.getCurrentConversation();
+        if (conversation) {
+            conversation.messages.push({ role: 'assistant', content: message });
+        }
     }
 
     createConversation(title) {

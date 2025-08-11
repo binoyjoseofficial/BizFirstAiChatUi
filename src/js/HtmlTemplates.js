@@ -1,4 +1,4 @@
-export class HtmlTemplates {
+class HtmlTemplates {
     getSidebar(options) {
         return `
             <nav class="conversations">

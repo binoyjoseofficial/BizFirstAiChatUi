@@ -1,4 +1,4 @@
-export class EventManager {
+class EventManager {
     constructor(app, optionsManager, conversationManager, uiRenderer, apiService, messageHandler, htmlQuery) {
         this.app = app;
         this.optionsManager = optionsManager;

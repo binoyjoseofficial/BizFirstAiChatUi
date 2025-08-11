@@ -1,12 +1,3 @@
-import { OptionsManager } from './OptionsManager.js';
-import { ConversationManager } from './ConversationManager.js';
-import { HtmlTemplates } from './HtmlTemplates.js';
-import { MessageHandler } from './MessageHandler.js';
-import { ApiService } from './ApiService.js';
-import { UiRenderer } from './UiRenderer.js';
-import { EventManager } from './EventManager.js';
-import { HtmlQuery } from './HtmlQuery.js';
-
 class AiChatUI {
     constructor(options) {
         this.optionsManager = new OptionsManager(options);
@@ -35,6 +26,11 @@ class AiChatUI {
 
     async handleSendMessage(message) {
         try {
+            let conversation = this.conversationManager.getCurrentConversation();
+            if (!conversation) {
+                conversation = this.conversationManager.createConversation('New Chat');
+            }
+            
             this.conversationManager.addUserMessage(message);
             this.uiRenderer.renderMessages(this.conversationManager.getCurrentConversation());
             const response = await this.apiService.sendMessage(this.conversationManager.getCurrentConversation());

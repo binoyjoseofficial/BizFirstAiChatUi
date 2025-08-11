@@ -1,4 +1,4 @@
-export class OptionsManager {
+class OptionsManager {
     constructor(options) {
         this.defaults = {
             api_key: '',
@@ -41,9 +41,14 @@ export class OptionsManager {
     }
 
     loadSettings() {
-        const settings = localStorage.getItem('settings');
-        if (settings) {
-            this.options = Object.assign(this.options, JSON.parse(settings));
+        try {
+            const settings = localStorage.getItem('settings');
+            if (settings) {
+                this.options = Object.assign(this.options, JSON.parse(settings));
+            }
+        } catch (error) {
+            console.error('Error loading settings from localStorage:', error);
+            // Continue with default options if parsing fails
         }
     }
 }

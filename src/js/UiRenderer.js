@@ -1,4 +1,4 @@
-export class UiRenderer {
+class UiRenderer {
     constructor(htmlTemplates, optionsManager, conversationManager, messageHandler) {
         this.htmlTemplates = htmlTemplates;
         this.optionsManager = optionsManager;
@@ -21,10 +21,18 @@ export class UiRenderer {
     }
 
     renderMessages(conversation) {
-        const messagesHtml = conversation.messages.map(msg =>
-            `<div class="message ${msg.role}">${msg.content}</div>`
-        ).join('');
-        this.container.querySelector('.content').innerHTML = messagesHtml;
+        if (!conversation || !conversation.messages) {
+            return;
+        }
+        const contentElement = this.container.querySelector('.content');
+        contentElement.innerHTML = '';
+        
+        conversation.messages.forEach(msg => {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', msg.role);
+            messageDiv.textContent = msg.content; // Safe text content instead of innerHTML
+            contentElement.appendChild(messageDiv);
+        });
     }
 
     renderSettingsModal() {

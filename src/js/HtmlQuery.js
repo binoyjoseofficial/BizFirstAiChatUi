@@ -1,4 +1,4 @@
-export class HtmlQuery {
+class HtmlQuery {
     constructor(optionsManager) {
         this.optionsManager = optionsManager;
         this.container = optionsManager.container;
